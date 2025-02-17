@@ -21,11 +21,11 @@
 - Template Engine: **Jinja**
 
 ## Local clone
-
-bash
+```
 git clone <https://github.com/ChopinF69/Block-Hub.git>
 cd Block-Hub
 flask run
+```
 
 # Tutorial
 
