@@ -4,7 +4,7 @@
 
 >Block Hub is a demo of decentralized blockchain web application that allows you to interact with a peer-to-peer network, visualize the current and past states of a blockchain, and modify block data and transactions.
 
->This project is built using Flask (Python), Bootstrap (CSS), Jinja (templating engine), and JavaScript.
+>This project is built using Flask (Python), Bootstrap (CSS), Jinja (templating engine).
 
 ## Features
 
