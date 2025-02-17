@@ -1,2 +1,10 @@
-__pychache__
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+venv/
+env/
+
+*.log
 
