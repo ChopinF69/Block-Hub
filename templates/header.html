@@ -1,0 +1,57 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<h3 class="text-center display-4" 
+    style="background: linear-gradient(to right, #3498db, #2c3e50); 
+           color: white; 
+           padding: 20px; 
+           border-radius: 10px; 
+           font-family: 'Poppins', sans-serif; 
+           letter-spacing: 2px; 
+           text-transform: lowercase;">
+    Block Hub
+</h3>
+
+
+<div class="d-flex justify-content-between align-items-center my-3">
+    
+
+    <div style="font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; color: #2c3e50; text-transform: lowercase; font-family: 'Poppins', sans-serif;">
+        Block Hub
+    </div>
+
+
+    <div class="text-center">
+      
+
+        {% if user_name %}
+            <p>Welcome, <strong>{{ user_name }}</p>
+            <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">All Network</a>
+            <a href="{{ url_for('myaccount') }}" class="btn btn-light border">My Account</a>
+            <a href="{{ url_for('allusers') }}" class="btn btn-light border">All Users</a>
+            <a href="{{ url_for('createsession') }}" class="btn btn-light border">Create Session</a>
+
+            <a href="{{ url_for('logs') }}" class="btn btn-info btn-lg w-100 my-4" style="font-size: 18px;">
+                View Real-time Logs
+            </a>
+            {% else %}
+            <a href="{{ url_for('index') }}" class="btn btn-primary">All Network</a>
+            <a href="{{ url_for('allusers') }}" class="btn btn-light border">All Users</a>
+            <a href="{{ url_for('get_public_key') }}" class="btn btn-light border">Get public key</a>
+
+            <a href="{{ url_for('logs') }}" class="btn btn-info btn-lg w-100 my-4" style="font-size: 18px;">
+                View Real-time Logs
+            </a>
+        {% endif %}
+    </div>
+
+    <div>
+        {% if not user_name %}
+            <a href="{{ url_for('login') }}" class="btn btn-outline-primary">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-success">Register</a>
+        {% endif %}
+    </div>
+</div>
+

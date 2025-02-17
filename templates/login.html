@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="text-center mb-4">Login</h2>
+        
+        <form action="/login" method="POST">
+            <div class="mb-3">
+                <label for="public_address" class="form-label fw-bold">Public Address:</label>
+                <input type="text" class="form-control rounded-pill" id="public_address" name="public_address" required placeholder="Enter your public address">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Password:</label>
+                <input type="password" class="form-control rounded-pill" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary w-100 rounded-pill">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

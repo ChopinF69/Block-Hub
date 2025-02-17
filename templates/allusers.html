@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Registered Users</h2>
+
+    {% if list %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Public Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name, public_address, amount in list %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <td>{{ amount }}</td>
+                        <td>{{ public_address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted text-center">No users found.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

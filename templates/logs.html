@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center" style="font-size: 2rem; font-weight: bold; margin-top: 20px;">System Logs</h2>
+
+<div style="background-color: #f4f4f4; padding: 15px; border-radius: 8px; overflow-y: auto; height: 400px; font-family: 'Courier New', Courier, monospace; line-height: 1.6;">
+  <pre>
+    {% for log in logs %}
+      {{ log }}
+    {% endfor %}
+  </pre>
+</div>
+
+<a href="{{ url_for('index') }}" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">Back to Home</a>
+{% endblock %}

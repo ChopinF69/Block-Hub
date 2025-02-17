@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">Create a New Session</h2>
+
+        <form action="{{ url_for('createsession_post') }}" method="post">
+            <div class="mb-3">
+                <label for="lst_of_names" class="form-label fw-bold">List of Names (separated by spaces):</label>
+                <textarea id="lst_of_names" name="lst_of_names" rows="4" class="form-control rounded-3" placeholder="Enter names separated by spaces"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="difficulty" class="form-label fw-bold">Difficulty:</label>
+                <input type="number" id="difficulty" name="difficulty" min="0" required class="form-control rounded-3" placeholder="Enter difficulty level">
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary w-100 rounded-pill">Create Session</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

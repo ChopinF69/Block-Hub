@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h1 class="text-center mb-4">Block Hub</h1>
+        
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <label for="name" class="fw-bold">Enter Your Name:</label>
+                <input type="text" class="form-control rounded-pill" id="name" name="name" placeholder="Your Name">
+            </div> 
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary w-100 rounded-pill">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5">
+  <h2>Your Public Address</h2>
+
+  {% if public_key %}
+    <p><strong>Public Address:</strong></p>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; word-wrap: break-word; font-family: 'Courier New', Courier, monospace; border: 1px solid #ddd;">
+      {{ public_key }}
+    </div>
+  {% else %}
+    <p style="color: #dc3545;"><strong>No public address found.</strong> Please enter a valid private address.</p>
+  {% endif %}
+
+  <a href="{{ url_for('get_public_key') }}" class="btn btn-primary mt-3">Go Back</a>
+</div>
+{% endblock %}

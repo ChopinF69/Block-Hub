@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4 shadow-sm">
+                <h2 class="mb-4 text-center">My Account</h2>
+
+                {% if user_name %}
+                    <p><strong>Balance:</strong> {{ balance }} coins</p>
+                    <div class="card p-4 mb-4">
+                        <h4 class="text-center">Welcome, {{ user_name }}!</h4>
+                        <p><strong>Public Address:</strong> {{ public_address }}</p>
+
+                        <!-- Add Money Form -->
+                        <form action="{{ url_for('add_money') }}" method="POST" class="mt-4">
+                            <label for="amount" class="form-label"><strong>Add Money:</strong></label>
+                            <input type="number" class="form-control" id="amount" name="amount" min="1" required>
+                            <button type="submit" class="btn btn-success mt-2 w-100">Add Money</button>
+                        </form>
+
+                        <!-- Send Money Form -->
+                        <form action="{{ url_for('sendamount') }}" method="POST" class="mt-4">
+                            <h5><strong>Send Money</strong></h5>
+                            <div class="mb-3">
+                                <label for="public_address" class="form-label">Recipient Public Address:</label>
+                                <input type="text" class="form-control" id="public_address" name="public_address" placeholder="Recipient's Public Address" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount_to_send" class="form-label">Amount to Send:</label>
+                                <input type="number" class="form-control" id="amount_to_send" name="amount" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Additional Data (Optional):</label>
+                                <textarea class="form-control" id="data" name="data" placeholder="Any additional information for the transaction (optional)"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Money</button>
+                        </form>
+
+                        <!-- Logout Form -->
+                        <form action="{{ url_for('logout') }}" method="POST" class="mt-4">
+                            <button type="submit" class="btn btn-danger w-100">Logout</button>
+                        </form>
+
+                        <!-- Transactions -->
+                        <div class="mt-4">
+                            <h4>Transaction History</h4>
+                            {% if transactions %}
+                                <ul class="list-group">
+                                    {% for tx in transactions %}
+                                        <li class="list-group-item">
+                                            Sent <strong>{{ tx.get_amount() }}</strong> to {{ tx.get_person_to() }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No transactions found.</p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">You are not logged in.</p>
+                    <div class="text-center">
+                        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+                    </div>
+                {% endif %}
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

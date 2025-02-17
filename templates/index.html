@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    {% for peer, service in peers %}
+    <div class="row mb-5">
+        <h2 class="col-12 text-center mb-4">{{ peer.get_id() }} - {{ peer.get_name() }}</h2>
+
+        <!-- Display Old Layers for Each Peer -->
+        {% for layer in service.get_old_blocks() %}
+        <div class="col-12 mb-4">
+            <h3 class="text-center">Previous State</h3>
+            <div class="row">
+                {% for block in layer %}
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-secondary text-white shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Block {{ block.get_index() }}</h5>
+                            <p><strong>Nonce:</strong> {{ block.get_nonce() }}</p>
+                            <p><strong>Previous Hash:</strong> {{ block.get_previous_hash() }}</p>
+                            <p><strong>Current Hash:</strong> {{ block.get_current_hash() }}</p>
+                            <p><strong>Data:</strong> {{ block.get_data() }}</p>
+
+                            <h6><strong>Transactions:</strong></h6>
+                            <ul>
+                                {% for transaction in block.get_list_of_transactions() %}
+                                <li>
+                                    <strong>Transaction #{{ loop.index }}:</strong> 
+                                    Amount: {{ transaction.get_amount() }} <br>
+                                    From: {{ transaction.get_person_from() }} <br>
+                                    To: {{ transaction.get_person_to() }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Display Current Blockchain State -->
+        <div class="col-12 mb-4">
+            <h3 class="text-center">Current Blockchain State</h3>
+            <div class="row">
+                {% for block in service.get_latest_blocks() %}
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-success text-white shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Block {{ block.get_index() }}</h5>
+                            <p><strong>Nonce:</strong> {{ block.get_nonce() }}</p>
+                            <p><strong>Previous Hash:</strong> {{ block.get_previous_hash() }}</p>
+                            <p><strong>Current Hash:</strong> {{ block.get_current_hash() }}</p>
+                            <p><strong>Data:</strong> {{ block.get_data() }}</p>
+
+                            <h6><strong>Transactions:</strong></h6>
+                            <ul>
+                                {% for transaction in block.get_list_of_transactions() %}
+                                <li>
+                                    <strong>Transaction #{{ loop.index }}:</strong> 
+                                    Amount: {{ transaction.get_amount() }} <br>
+                                    From: {{ transaction.get_person_from() }} <br>
+                                    To: {{ transaction.get_person_to() }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <!-- Modify Block Data -->
+                            <form action="/update_block_data/{{ peer.get_id() }}/{{ block.get_index() }}" method="POST" class="mt-4">
+                                <div class="form-group">
+                                    <label for="data">Update Data</label>
+                                    <input type="text" class="form-control" id="data" name="data" value="{{ block.get_data() }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Update Block Data</button>
+                            </form>
+
+                            <!-- Modify Transaction Data -->
+                            <h6><strong>Transactions:</strong></h6>
+                            {% for transaction in block.get_list_of_transactions() %}
+                            <form action="/update_transaction_data/{{ peer.get_id() }}/{{ block.get_index() }}/{{ transaction.get_index() }}" method="POST" class="mt-2">
+                                <div class="form-group">
+                                    <label for="new_amount_{{ transaction.get_amount() }}">Update Transaction Amount</label>
+                                    <input type="number" class="form-control" id="new_amount_{{ transaction.get_amount() }}" name="new_amount" value="{{ transaction.get_amount() }}" min="0" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Update Transaction Amount</button>
+                            </form>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}
